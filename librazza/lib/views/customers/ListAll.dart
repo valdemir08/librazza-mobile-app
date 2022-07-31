@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:librazza/views/customers/CustomerRegisterView.dart';
+import 'package:librazza/views/customers/RegisterView.dart';
 
-class CustomersList extends StatefulWidget {
-  const CustomersList({Key? key}) : super(key: key);
+class ListAll extends StatefulWidget {
+  const ListAll({Key? key}) : super(key: key);
 
   @override
-  State<CustomersList> createState() => _CustomersListState();
+  State<ListAll> createState() => _ListAllState();
 }
 
-class _CustomersListState extends State<CustomersList> {
+class _ListAllState extends State<ListAll> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class _CustomersListState extends State<CustomersList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const CustomerRegisterView()),
+          MaterialPageRoute(builder: (context) => const RegisterView()),
         ),
         tooltip: 'Adicionar cliente',
         child: const Icon(Icons.add),

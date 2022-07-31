@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:librazza/functions/ExitApp.dart';
-import 'package:librazza/views/customers/CustomersList.dart';
+import 'package:librazza/views/customers/ListAll.dart';
 
 class NavBar extends StatelessWidget {
   @override
@@ -36,7 +36,7 @@ class NavBar extends StatelessWidget {
             title: const Text('Clientes'),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const CustomersList()),
+              MaterialPageRoute(builder: (context) => const ListAll()),
             ),
           ),
           ListTile(

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class CustomerRegister extends StatefulWidget {
-  const CustomerRegister({Key? key}) : super(key: key);
+class RegisterForm extends StatefulWidget {
+  const RegisterForm({Key? key}) : super(key: key);
 
   @override
-  State<CustomerRegister> createState() => _CustomerRegisterState();
+  State<RegisterForm> createState() => _RegisterFormState();
 }
 
-class _CustomerRegisterState extends State<CustomerRegister> {
+class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -19,6 +17,7 @@ class _CustomerRegisterState extends State<CustomerRegister> {
         child: Column(
           children: <Widget>[
             //inputs
+            //nome
             Container(
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
@@ -29,15 +28,19 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
-                    return "Informe o valor";
+                    return "Informe o nome";
                   } else {
                     return null;
                   }
                 },
               ),
             ),
+
             //botões
             Container(
+              width: 100,
+              height: 30,
+              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Center(
                   child: ElevatedButton(
                 onPressed: () {

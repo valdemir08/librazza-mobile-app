@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class CustomerRegisterForm extends StatefulWidget {
-  const CustomerRegisterForm({Key? key}) : super(key: key);
+class RegisterForm extends StatefulWidget {
+  const RegisterForm({Key? key}) : super(key: key);
 
   @override
-  State<CustomerRegisterForm> createState() => _CustomerRegisterFormState();
+  State<RegisterForm> createState() => _RegisterFormState();
 }
 
-class _CustomerRegisterFormState extends State<CustomerRegisterForm> {
+class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+    DateTime selectedDate = DateTime.now();
 
     return Form(
         key: _formKey,
@@ -24,6 +23,7 @@ class _CustomerRegisterFormState extends State<CustomerRegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                   labelText: "Nome",
                 ),
                 keyboardType: TextInputType.text,
@@ -41,6 +41,7 @@ class _CustomerRegisterFormState extends State<CustomerRegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                   labelText: "Cpf",
                 ),
                 keyboardType: TextInputType.text,
@@ -58,6 +59,7 @@ class _CustomerRegisterFormState extends State<CustomerRegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                   labelText: "Telefone",
                 ),
                 keyboardType: TextInputType.phone,
@@ -75,6 +77,7 @@ class _CustomerRegisterFormState extends State<CustomerRegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                   labelText: "Email",
                 ),
                 keyboardType: TextInputType.emailAddress,
@@ -87,8 +90,25 @@ class _CustomerRegisterFormState extends State<CustomerRegisterForm> {
                 },
               ),
             ),
+            //data aniversario
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child: InputDatePickerFormField(
+                firstDate: DateTime(1900),
+                lastDate: DateTime.now(),
+                initialDate: selectedDate,
+                onDateSubmitted: (date) {
+                  setState(() {
+                    selectedDate = date;
+                  });
+                },
+              ),
+            ),
             //botões
             Container(
+              width: 100,
+              height: 30,
+              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Center(
                   child: ElevatedButton(
                 onPressed: () {
