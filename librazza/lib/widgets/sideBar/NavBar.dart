@@ -1,16 +1,17 @@
-import 'dart:io';
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:librazza/functions/ExitApp.dart';
-import 'package:librazza/views/customers/ListAll.dart';
+import 'package:librazza/views/customers/ListAll.dart' as customers;
+import 'package:librazza/views/authors/ListAll.dart' as authors;
+import 'package:librazza/views/employees/ListAll.dart' as employees;
+import 'package:librazza/views/books/ListAll.dart' as books;
 
 class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        // Remove padding
         padding: EdgeInsets.zero,
         children: [
           const UserAccountsDrawerHeader(
@@ -36,23 +37,34 @@ class NavBar extends StatelessWidget {
             title: const Text('Clientes'),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ListAll()),
+              MaterialPageRoute(
+                  builder: (context) => const customers.ListAll()),
             ),
           ),
           ListTile(
             leading: const Icon(Icons.book),
             title: const Text('Livros'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const books.ListAll()),
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.group),
             title: const Text('Autores'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const authors.ListAll()),
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.badge),
             title: const Text('Funcionários'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const employees.ListAll()),
+            ),
           ),
           const Divider(),
           ListTile(
