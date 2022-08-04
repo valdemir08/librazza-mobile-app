@@ -184,11 +184,10 @@ class _RegisterFormState extends State<RegisterForm> {
 
             //botões
             Container(
-              width: 100,
-              height: 30,
               margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Center(
                   child: ElevatedButton(
+                style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(

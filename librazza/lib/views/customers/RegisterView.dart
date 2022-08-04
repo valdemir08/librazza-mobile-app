@@ -10,7 +10,9 @@ class RegisterView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Adicionar cliente"),
       ),
-      body: const RegisterForm(),
+      body: const SingleChildScrollView(
+        child: RegisterForm(),
+      ),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:librazza/views/customers/ListAll.dart' as customers;
 import 'package:librazza/views/authors/ListAll.dart' as authors;
 import 'package:librazza/views/employees/ListAll.dart' as employees;
 import 'package:librazza/views/books/ListAll.dart' as books;
+import 'package:librazza/views/loans/ListAll.dart' as loans;
 
 class NavBar extends StatelessWidget {
   @override
@@ -30,7 +31,10 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.date_range),
             title: const Text('Empréstimos'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const loans.ListAll()),
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.person),
