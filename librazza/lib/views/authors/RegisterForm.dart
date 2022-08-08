@@ -8,10 +8,10 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  final _formKey = GlobalKey<FormState>();
+  String? _name;
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-
     return Form(
         key: _formKey,
         child: Column(
@@ -22,9 +22,13 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.person),
                   border: OutlineInputBorder(),
                   labelText: "Nome",
                 ),
+                onSaved: (String? value) {
+                  _name = value.toString();
+                },
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -38,11 +42,10 @@ class _RegisterFormState extends State<RegisterForm> {
 
             //botões
             Container(
-              width: 100,
-              height: 30,
               margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Center(
                   child: ElevatedButton(
+                style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(

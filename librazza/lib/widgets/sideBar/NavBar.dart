@@ -1,12 +1,15 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+//import 'package:librazza/functions/ExitApp.dart';
 import 'package:librazza/functions/ExitApp.dart';
 import 'package:librazza/views/customers/ListAll.dart' as customers;
 import 'package:librazza/views/authors/ListAll.dart' as authors;
 import 'package:librazza/views/employees/ListAll.dart' as employees;
 import 'package:librazza/views/books/ListAll.dart' as books;
 import 'package:librazza/views/loans/ListAll.dart' as loans;
+
+//import '../../functions/exit_app.dart';
 
 class NavBar extends StatelessWidget {
   @override
@@ -74,7 +77,7 @@ class NavBar extends StatelessWidget {
           ListTile(
             title: const Text('Exit'),
             leading: const Icon(Icons.exit_to_app),
-            onTap: () => const ExitApp().showExitDialog(context),
+            onTap: () => ExitApp().showExitDialog(context),
           ),
         ],
       ),

@@ -1,12 +1,9 @@
-// ignore: file_names
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class ExitApp extends StatelessWidget {
-  const ExitApp({Key? key}) : super(key: key);
-
+class ExitApp {
   Future<bool?> showExitDialog(BuildContext context) async {
     return await showDialog(
       context: context,
@@ -34,11 +31,5 @@ class ExitApp extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
   }
 }

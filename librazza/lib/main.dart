@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
     bool? exitResult = await showDialog(
       context: context,
       //builder: (context) => _buildExitDialog(context),
-      builder: (context) => const ExitApp().buildExitDialog(context),
+      builder: (context) => ExitApp().buildExitDialog(context),
     );
     return exitResult ?? false;
   }

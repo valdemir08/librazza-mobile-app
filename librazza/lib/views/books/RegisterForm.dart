@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -8,11 +10,20 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  final _formKey = GlobalKey<FormState>();
+  DateTime selectedDate = DateTime.now();
+  String? _title,
+      _edition,
+      _publishing_company,
+      _year_of_publication,
+      _number_of_pages,
+      _code_bar,
+      _gender,
+      _amount,
+      _isbn;
+
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    DateTime selectedDate = DateTime.now();
-
     return Form(
         key: _formKey,
         child: Column(
@@ -23,9 +34,13 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.title),
                   border: OutlineInputBorder(),
                   labelText: "Título",
                 ),
+                onSaved: (String? value) {
+                  _title = value.toString();
+                },
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -41,9 +56,20 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Text(
+                    "Xª",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
                   border: OutlineInputBorder(),
                   labelText: "Edição",
                 ),
+                onSaved: (String? value) {
+                  _edition = value.toString();
+                },
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -59,9 +85,13 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.apartment),
                   border: OutlineInputBorder(),
                   labelText: "Editora",
                 ),
+                onSaved: (String? value) {
+                  _publishing_company = value.toString();
+                },
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -77,9 +107,13 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.calendar_today),
                   border: OutlineInputBorder(),
                   labelText: "Ano publicação",
                 ),
+                onSaved: (String? value) {
+                  _year_of_publication = value.toString();
+                },
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -95,9 +129,13 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.pin_outlined),
                   border: OutlineInputBorder(),
                   labelText: "N° páginas",
                 ),
+                onSaved: (String? value) {
+                  _number_of_pages = value.toString();
+                },
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -113,9 +151,13 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Icon(CupertinoIcons.barcode),
                   border: OutlineInputBorder(),
                   labelText: "Cód. Barras",
                 ),
+                onSaved: (String? value) {
+                  _code_bar = value.toString();
+                },
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -131,9 +173,13 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.favorite),
                   border: OutlineInputBorder(),
                   labelText: "Gênero",
                 ),
+                onSaved: (String? value) {
+                  _gender = value.toString();
+                },
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -150,9 +196,13 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Icon(Icons.pin_outlined),
                   border: OutlineInputBorder(),
                   labelText: "Quantidade",
                 ),
+                onSaved: (String? value) {
+                  _amount = value.toString();
+                },
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -168,9 +218,20 @@ class _RegisterFormState extends State<RegisterForm> {
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
                 decoration: const InputDecoration(
+                  icon: Text(
+                    "ISBN",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                      fontSize: 10,
+                    ),
+                  ),
                   border: OutlineInputBorder(),
                   labelText: "ISBN",
                 ),
+                onSaved: (String? value) {
+                  _isbn = value.toString();
+                },
                 keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
