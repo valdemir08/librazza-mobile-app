@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:librazza/widgets/MaskFormatter.dart' as mask;
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 onSaved: (String? value) {
                   _edition = value.toString();
                 },
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
                     return "Informe a edição";
@@ -106,6 +107,7 @@ class _RegisterFormState extends State<RegisterForm> {
             Container(
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
+                inputFormatters: [mask.yearFormater],
                 decoration: const InputDecoration(
                   icon: Icon(Icons.calendar_today),
                   border: OutlineInputBorder(),
@@ -198,7 +200,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 decoration: const InputDecoration(
                   icon: Icon(Icons.pin_outlined),
                   border: OutlineInputBorder(),
-                  labelText: "Quantidade",
+                  labelText: "Quantidade de livros",
                 ),
                 onSaved: (String? value) {
                   _amount = value.toString();
@@ -251,6 +253,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Sucesso!")));
                   }

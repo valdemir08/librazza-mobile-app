@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:librazza/widgets/MaskFormatter.dart' as mask;
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -45,14 +46,15 @@ class _RegisterFormState extends State<RegisterForm> {
             Container(
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
+                inputFormatters: [mask.cpfFormater],
                 decoration: const InputDecoration(
                   icon: Icon(Icons.badge_outlined),
                   border: OutlineInputBorder(),
                   labelText: "Cpf",
                 ),
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.number,
                 onSaved: (String? value) {
-                  _cpf = value.toString();
+                  _cpf = mask.cpfFormater.getUnmaskedText();
                 },
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -67,14 +69,15 @@ class _RegisterFormState extends State<RegisterForm> {
             Container(
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: TextFormField(
+                inputFormatters: [mask.phoneNumberFormater],
                 decoration: const InputDecoration(
                   icon: Icon(Icons.phone),
                   border: OutlineInputBorder(),
                   labelText: "Telefone",
                 ),
-                keyboardType: TextInputType.phone,
+                keyboardType: TextInputType.number,
                 onSaved: (String? value) {
-                  _phoneNumber = value.toString();
+                  _phoneNumber = mask.phoneNumberFormater.getUnmaskedText();
                 },
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
@@ -152,6 +155,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Sucesso!")));
                   }
