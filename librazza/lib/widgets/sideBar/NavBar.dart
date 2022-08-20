@@ -27,7 +27,7 @@ class NavBar extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: Colors.brown,
               //image:
             ),
           ),

@@ -24,6 +24,16 @@ class _RegisterFormState extends State<RegisterForm> {
       _isbn;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
         key: _formKey,

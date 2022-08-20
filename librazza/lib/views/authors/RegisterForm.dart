@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:librazza/models/author.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -9,7 +10,24 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
-  String? _name;
+  late String _name;
+  Future<Author>? _futureAuthor;
+
+  FutureBuilder<Author> buildFutureBuilder() {
+    return FutureBuilder<Author>(
+      future: _futureAuthor,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!.name);
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -48,6 +66,10 @@ class _RegisterFormState extends State<RegisterForm> {
                 style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    //_futureAuthor = createAuthor(_name);
+                    _futureAuthor = createAuthor("Mario de Andrade");
+                    print(_futureAuthor.toString());
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Sucesso!")));
                   }

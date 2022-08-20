@@ -124,6 +124,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Sucesso!")));
                   }
