@@ -1,5 +1,6 @@
-class ApiConstants {
-  static String baseUrl = "http://10.0.0.213:5000";
+class Api {
+  //static String baseUrl = "http://10.0.0.213:5000";//dell
+  static String baseUrl = "http://10.0.0.143:5000"; //samsung
   static String authorEndpoint = "/autor";
   static String booksEndpoint = "/livro";
   static String customersEndpont = "/cliente";

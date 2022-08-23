@@ -27,7 +27,7 @@ class Company {
 
 Future<Company> createCompany(String name, String cnpj) async {
   final response = await http.post(
-    Uri.parse(ApiConstants.companyEndpoint + "/add"),
+    Uri.parse(Api.companyEndpoint + "/add"),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

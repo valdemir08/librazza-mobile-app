@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:librazza/models/author.dart';
+import 'package:librazza/views/authors/ListAll.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -10,23 +11,8 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
-  late String _name;
+  late String name;
   Future<Author>? _futureAuthor;
-
-  FutureBuilder<Author> buildFutureBuilder() {
-    return FutureBuilder<Author>(
-      future: _futureAuthor,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Text(snapshot.data!.name);
-        } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
-        }
-
-        return const CircularProgressIndicator();
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +31,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   labelText: "Nome",
                 ),
                 onSaved: (String? value) {
-                  _name = value.toString();
+                  name = value.toString();
                 },
                 keyboardType: TextInputType.text,
                 validator: (value) {
@@ -67,9 +53,10 @@ class _RegisterFormState extends State<RegisterForm> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    //_futureAuthor = createAuthor(_name);
-                    _futureAuthor = createAuthor("Mario de Andrade");
-                    print(_futureAuthor.toString());
+                    _futureAuthor = createAuthor(name);
+                    //print(_futureAuthor.toString());
+
+                    Navigator.pop(context, true);
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Sucesso!")));
                   }
