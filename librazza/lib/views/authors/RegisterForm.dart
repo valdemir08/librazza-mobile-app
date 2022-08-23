@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:librazza/models/author.dart';
 import 'package:librazza/views/authors/ListAll.dart';
+import 'package:librazza/services/api_service_author.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -34,6 +35,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   name = value.toString();
                 },
                 keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.sentences,
                 validator: (value) {
                   if (value!.isEmpty || value == null) {
                     return "Informe o nome";
@@ -53,10 +55,13 @@ class _RegisterFormState extends State<RegisterForm> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    _futureAuthor = createAuthor(name);
-                    //print(_futureAuthor.toString());
+                    _futureAuthor = ApiServiceAuthor().createAuthor(name);
 
-                    Navigator.pop(context, true);
+                    //Navigator.pop(context, true);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ListAll()),
+                    );
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Sucesso!")));
                   }

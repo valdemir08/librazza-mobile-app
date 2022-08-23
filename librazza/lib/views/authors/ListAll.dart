@@ -38,18 +38,21 @@ class _ListAllState extends State<ListAll> {
       appBar: AppBar(
         title: Text("Autores"),
       ),
-      body: Center(
-          child: RefreshIndicator(
-        onRefresh: () => refreshData(),
-        child: FutureBuilder<List<Author>>(
-            future: authors,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) print(snapshot.error);
-              return snapshot.hasData
-                  ? BuildAuthors(items: snapshot.data)
-                  : Center(child: CircularProgressIndicator());
-            }),
-      )),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 200),
+        child: Center(
+            child: RefreshIndicator(
+          onRefresh: () => refreshData(),
+          child: FutureBuilder<List<Author>>(
+              future: authors,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) print(snapshot.error);
+                return snapshot.hasData
+                    ? BuildAuthors(items: snapshot.data)
+                    : Center(child: CircularProgressIndicator());
+              }),
+        )),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
           context,

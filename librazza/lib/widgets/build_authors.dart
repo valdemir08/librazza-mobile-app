@@ -11,6 +11,9 @@ class BuildAuthors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics:
+          const NeverScrollableScrollPhysics(), //proprieda para evitar o erro do scrol
+      shrinkWrap: true, //proprieda para evitar o erro do scrol
       itemCount: items?.length,
       itemBuilder: (context, index) {
         return Card(
