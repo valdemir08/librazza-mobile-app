@@ -38,11 +38,11 @@ class _ListAllState extends State<ListAll> {
       appBar: AppBar(
         title: Text("Autores"),
       ),
-      body: Center(
-        child: RefreshIndicator(
-          onRefresh: () => refreshData(),
+      body: RefreshIndicator(
+        onRefresh: () => refreshData(),
+        child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 200),
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 100),
             child: FutureBuilder<List<Author>>(
                 future: authors,
                 builder: (context, snapshot) {
