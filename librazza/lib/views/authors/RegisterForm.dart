@@ -57,7 +57,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     _formKey.currentState!.save();
                     _futureAuthor = ApiServiceAuthor().createAuthor(name);
 
-                    //Navigator.pop(context, true);
+                    Navigator.pop(context, true);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const ListAll()),

@@ -23,7 +23,7 @@ class _ListAllState extends State<ListAll> {
     refreshData();
   }
 
-  Future<List<Author>> authors = ApiServiceAuthor().getAuthors();
+  late Future<List<Author>> authors;
   Future<List<Author>> refreshData() {
     setState(() {
       authors = ApiServiceAuthor().getAuthors();
@@ -38,20 +38,43 @@ class _ListAllState extends State<ListAll> {
       appBar: AppBar(
         title: Text("Autores"),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 200),
-        child: Center(
-            child: RefreshIndicator(
+      body: Center(
+        child: RefreshIndicator(
           onRefresh: () => refreshData(),
-          child: FutureBuilder<List<Author>>(
-              future: authors,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) print(snapshot.error);
-                return snapshot.hasData
-                    ? BuildAuthors(items: snapshot.data)
-                    : Center(child: CircularProgressIndicator());
-              }),
-        )),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 200),
+            child: FutureBuilder<List<Author>>(
+                future: authors,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return Column(
+                        children: [
+                          Text("Snapshot Error: ${snapshot.error}"),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(200, 50)),
+                              onPressed: () => refreshData(),
+                              child: const Text("Refresh Data"),
+                            ),
+                          )
+                        ],
+                      );
+                    } else if (snapshot.hasData) {
+                      return BuildAuthors(items: snapshot.data);
+                    } else {
+                      return const Text('Ainda não há autores cadastrados');
+                    }
+                  } else {
+                    return Text('State: ${snapshot.connectionState}');
+                  }
+                }),
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(

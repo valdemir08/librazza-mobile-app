@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:librazza/models/author.dart';
+import 'dart:math';
 
 class BuildAuthors extends StatelessWidget {
-  const BuildAuthors({Key? key, this.items}) : super(key: key);
+  BuildAuthors({Key? key, this.items}) : super(key: key);
   final List<Author>? items;
+
+  final List<MaterialColor> colors = [Colors.blue];
+  //int randomNumber = Ramdom().
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +21,36 @@ class BuildAuthors extends StatelessWidget {
       itemCount: items?.length,
       itemBuilder: (context, index) {
         return Card(
-          elevation: 6,
+          elevation: 10,
           margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
           child: ListTile(
-            visualDensity: VisualDensity(vertical: 4), // to expand
+            visualDensity: VisualDensity(vertical: 1), // to expand
 
             leading: CircleAvatar(
-              backgroundColor: Colors.brown,
-              child: Text((index + 1).toString()),
-            ),
+                backgroundColor:
+                    Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                        .withOpacity(1.0),
+                child: Text(items![index].name.toString()[0])
+                //Text(
+                //(index + 1).toString()),
+
+                //style: TextStyle(fontWeight: FontWeight.w500
+                ),
             title: Text(items![index].name.toString()),
-            //subtitle: Text(items![index].id.toString()),
-            trailing: const Icon(Icons.edit),
+            subtitle: Text("ID: ${items![index].id}"),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              //remove a sobreposição do nome "Trailing widget consumes entire tile width."
+              children: [
+                IconButton(onPressed: () => {}, icon: const Icon(Icons.edit)),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.delete_forever,
+                      color: Colors.red,
+                    ))
+              ],
+            ),
           ),
         );
       },
