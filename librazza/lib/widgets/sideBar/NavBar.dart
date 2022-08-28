@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 //import 'package:librazza/functions/ExitApp.dart';
-import 'package:librazza/functions/ExitApp.dart';
+import 'package:librazza/functions/alert_dialog.dart';
 import 'package:librazza/views/customers/ListAll.dart' as customers;
 import 'package:librazza/views/authors/ListAll.dart' as authors;
 import 'package:librazza/views/employees/ListAll.dart' as employees;
@@ -61,7 +61,7 @@ class NavBar extends StatelessWidget {
             title: const Text('Autores'),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const authors.ListAll()),
+              MaterialPageRoute(builder: (context) => authors.ListAll()),
             ),
           ),
           ListTile(

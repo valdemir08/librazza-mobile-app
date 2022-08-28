@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:librazza/functions/ExitApp.dart';
+import 'package:librazza/functions/alert_dialog.dart';
 import 'package:librazza/widgets/sideBar/NavBar.dart';
 
 class MyHomePage extends StatefulWidget {

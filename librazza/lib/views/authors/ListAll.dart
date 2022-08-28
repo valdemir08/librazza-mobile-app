@@ -7,7 +7,7 @@ import 'package:librazza/models/author.dart';
 import 'package:librazza/views/authors/RegisterView.dart';
 import 'package:http/http.dart' as http;
 import 'package:librazza/services/api_service_author.dart';
-import 'package:librazza/widgets/build_authors.dart';
+import 'package:librazza/views/authors/build_authors.dart';
 
 class ListAll extends StatefulWidget {
   const ListAll({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class _ListAllState extends State<ListAll> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Autores"),
+        title: const Text("Autores"),
       ),
       body: RefreshIndicator(
         onRefresh: () => refreshData(),
@@ -57,7 +57,7 @@ class _ListAllState extends State<ListAll> {
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(200, 50)),
+                                  minimumSize: const Size(200, 50)),
                               onPressed: () => refreshData(),
                               child: const Text("Refresh Data"),
                             ),
@@ -65,7 +65,8 @@ class _ListAllState extends State<ListAll> {
                         ],
                       );
                     } else if (snapshot.hasData) {
-                      return BuildAuthors(items: snapshot.data);
+                      return BuildAuthors(
+                          authors: snapshot.data, listAllState: this);
                     } else {
                       return const Text('Ainda não há autores cadastrados');
                     }

@@ -44,14 +44,47 @@ class ApiServiceAuthor {
   }
 
   Future<Author> createAuthor(String name) async {
-    final response = await http.post(
-      Uri.parse(Api.baseUrl + Api.authorEndpoint + "/add/"),
+    http.Response response = await http.post(
+      Uri.parse("$url/add/"),
+
       body: {"nome": name}, //jsonEncode não estava funcionando
     );
     if (response.statusCode == 201) {
       return Author.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Falha na criação de autor");
+    }
+  }
+
+  Future<Author> updateAuthor(int id, String name) async {
+    http.Response response = await http.put(
+      Uri.parse("$url/$id/"),
+      /* headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      }, */
+      body: {"nome": name}, //jsonEncode não estava funcionando
+    );
+    if (response.statusCode == 200) {
+      return Author.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception("Falha na atualização de autor");
+    }
+  }
+
+  Future<Author> deleteAuthor(int id) async {
+    http.Response response = await http
+        .delete(Uri.parse("$url/delete/$id/"), headers: <String, String>{
+      "Accept": "*/*",
+      "Connection": "keep-alive",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Referer": "http://10.0.0.143:5000/autor/delete/$id/",
+      'Content-Type': 'application/json; charset=UTF-8'
+    });
+
+    if (response.statusCode == 201) {
+      return Author.fromJson(jsonDecode(response.body));
+    } else {
+      throw "Falha ao deletar autor";
     }
   }
 }
