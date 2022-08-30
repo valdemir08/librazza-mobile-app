@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:librazza/views/books/RegisterView.dart';
+import 'package:librazza/views/customers/register_view.dart';
 
 class ListAll extends StatefulWidget {
   const ListAll({Key? key}) : super(key: key);
@@ -13,15 +13,15 @@ class _ListAllState extends State<ListAll> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Livros"),
+        title: const Text("Clientes"),
       ),
-      body: const Center(child: Text("Listagem livros")),
+      body: const Center(child: Text("texto")),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const RegisterView()),
         ),
-        tooltip: 'Adicionar livro',
+        tooltip: 'Adicionar cliente',
         child: const Icon(Icons.add),
       ),
     );

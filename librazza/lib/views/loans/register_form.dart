@@ -10,10 +10,10 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _openDateController = TextEditingController();
-  TextEditingController _closeDateController = TextEditingController();
+  final TextEditingController _openDateController = TextEditingController();
+  final TextEditingController _closeDateController = TextEditingController();
   DateTime nowDate = DateTime.now();
-  String? _customer, _book, _open_date, _close_date;
+  late final String _customer, _book, _open_date, _close_date;
   @override
   Widget build(BuildContext context) {
     _openDateController.text = DateFormat("dd-MM-yyyy").format(nowDate);

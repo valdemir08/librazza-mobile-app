@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:librazza/models/author.dart';
-import 'package:librazza/services/api_service_author.dart';
-import 'package:librazza/views/authors/ListAll.dart';
+import 'package:librazza/services/author.dart';
+import 'package:librazza/views/authors/list_all.dart';
 
 class EditForm extends StatelessWidget {
   EditForm({Key? key, required this.author}) : super(key: key);
@@ -41,7 +38,7 @@ class EditForm extends StatelessWidget {
                       keyboardType: TextInputType.text,
                       textCapitalization: TextCapitalization.sentences,
                       validator: (value) {
-                        if (value!.isEmpty || value == null) {
+                        if (value!.isEmpty) {
                           return "Informe o nome";
                         } else {
                           return null;
@@ -50,16 +47,16 @@ class EditForm extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                     child: Center(
                         child: ElevatedButton(
-                      style:
-                          ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(200, 50)),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
 
-                          ApiServiceAuthor()
+                          AuthorService()
                               .updateAuthor(author.id, _nameController.text);
 
                           Navigator.pop(context, true);

@@ -4,7 +4,7 @@ import 'package:librazza/functions/api_constants.dart';
 import 'package:librazza/models/author.dart';
 import 'package:http/http.dart' as http;
 
-class ApiServiceAuthor {
+class AuthorService {
   final String url = Api.baseUrl + Api.authorEndpoint;
 
 // ignore: slash_for_doc_comments

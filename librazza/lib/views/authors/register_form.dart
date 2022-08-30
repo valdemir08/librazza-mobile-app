@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:librazza/models/author.dart';
-import 'package:librazza/views/authors/ListAll.dart';
-import 'package:librazza/services/api_service_author.dart';
+import 'package:librazza/views/authors/list_all.dart';
+import 'package:librazza/services/author.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.sentences,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe o nome";
                   } else {
                     return null;
@@ -48,14 +48,15 @@ class _RegisterFormState extends State<RegisterForm> {
 
             //botões
             Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Center(
                   child: ElevatedButton(
-                style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
+                style:
+                    ElevatedButton.styleFrom(minimumSize: const Size(200, 50)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    _futureAuthor = ApiServiceAuthor().createAuthor(name);
+                    _futureAuthor = AuthorService().createAuthor(name);
 
                     Navigator.pop(context, true);
                     Navigator.pop(context, true);

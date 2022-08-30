@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:librazza/functions/alert_dialog.dart';
-import 'package:librazza/views/auth/Login.dart';
-import 'package:librazza/widgets/sideBar/NavBar.dart';
+import 'package:librazza/views/auth/login.dart';
 
 void main() {
   runApp(const MyApp());

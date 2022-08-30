@@ -1,13 +1,8 @@
-import 'dart:convert';
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:librazza/functions/api_constants.dart';
-import 'package:librazza/models/author.dart';
-import 'package:librazza/views/authors/RegisterView.dart';
-import 'package:http/http.dart' as http;
-import 'package:librazza/services/api_service_author.dart';
-import 'package:librazza/views/authors/build_authors.dart';
+import 'package:librazza/models/employe.dart';
+import 'package:librazza/services/employe.dart';
+import 'package:librazza/views/employees/build_employees.dart';
+import 'package:librazza/views/employees/register_view.dart';
 
 class ListAll extends StatefulWidget {
   const ListAll({Key? key}) : super(key: key);
@@ -23,31 +18,31 @@ class _ListAllState extends State<ListAll> {
     refreshData();
   }
 
-  late Future<List<Author>> authors;
-  Future<List<Author>> refreshData() {
+  late Future<List<Employe>> employees;
+  Future<List<Employe>> refreshData() {
     setState(() {
-      authors = ApiServiceAuthor().getAuthors();
+      employees = EmployeService().getEmployees();
     });
 
-    return authors;
+    return employees;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Autores"),
+        title: const Text("Funcionários"),
       ),
       body: RefreshIndicator(
         onRefresh: () => refreshData(),
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 100),
-            child: FutureBuilder<List<Author>>(
-                future: authors,
+            child: FutureBuilder<List<Employe>>(
+                future: employees,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
                       return Column(
@@ -64,11 +59,13 @@ class _ListAllState extends State<ListAll> {
                           )
                         ],
                       );
-                    } else if (snapshot.hasData) {
-                      return BuildAuthors(
-                          authors: snapshot.data, listAllState: this);
+                    } else if (snapshot.data.toString() == "[]") {
+                      print(snapshot.data.toString());
+                      return const Text(//snapshot.hasData
+                          'Ainda não há Funcionários cadastrados');
                     } else {
-                      return const Text('Ainda não há autores cadastrados');
+                      return BuildEmployees(
+                          employees: snapshot.data, listAllState: this);
                     }
                   } else {
                     return Text('State: ${snapshot.connectionState}');
@@ -82,7 +79,7 @@ class _ListAllState extends State<ListAll> {
           context,
           MaterialPageRoute(builder: (context) => const RegisterView()),
         ),
-        tooltip: 'Adicionar autor',
+        tooltip: 'Adicionar Funcionário',
         child: const Icon(Icons.add),
       ),
     );

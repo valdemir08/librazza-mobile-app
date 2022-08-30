@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:librazza/main.dart';
-import 'package:librazza/views/home/MyHomePage.dart';
+import 'package:librazza/views/home/my_home_page.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -33,7 +32,7 @@ class _LoginFormState extends State<LoginForm> {
                 },
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe o email";
                   } else {
                     return null;
@@ -58,7 +57,7 @@ class _LoginFormState extends State<LoginForm> {
                 keyboardType: TextInputType.visiblePassword,
                 validator: (value) {
                   //value.trim().isEmpty
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe a senha";
                   } else {
                     return null;
@@ -69,10 +68,11 @@ class _LoginFormState extends State<LoginForm> {
 
             //botões
             Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Center(
                   child: ElevatedButton(
-                style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
+                style:
+                    ElevatedButton.styleFrom(minimumSize: const Size(200, 50)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();

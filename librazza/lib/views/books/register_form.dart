@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
-import 'package:librazza/widgets/MaskFormatter.dart' as mask;
+import 'package:librazza/widgets/mask_formatter.dart' as mask;
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -54,7 +53,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 keyboardType: TextInputType.text,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe o título";
                   } else {
                     return null;
@@ -83,7 +82,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe a edição";
                   } else {
                     return null;
@@ -105,7 +104,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 keyboardType: TextInputType.text,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe a editora";
                   } else {
                     return null;
@@ -128,7 +127,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe o ano de publicação";
                   } else {
                     return null;
@@ -150,7 +149,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe o número de páginas";
                   } else {
                     return null;
@@ -172,7 +171,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 keyboardType: TextInputType.text,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe o código de barras";
                   } else {
                     return null;
@@ -194,7 +193,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 keyboardType: TextInputType.text,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe o gênero";
                     //ver a possibilidade de uma tabela genêro
                   } else {
@@ -217,7 +216,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 keyboardType: TextInputType.text,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe a quantidade";
                   } else {
                     return null;
@@ -246,7 +245,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
                 keyboardType: TextInputType.text,
                 validator: (value) {
-                  if (value!.isEmpty || value == null) {
+                  if (value!.isEmpty) {
                     return "Informe o ISBN";
                   } else {
                     return null;
@@ -257,10 +256,11 @@ class _RegisterFormState extends State<RegisterForm> {
 
             //botões
             Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Center(
                   child: ElevatedButton(
-                style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
+                style:
+                    ElevatedButton.styleFrom(minimumSize: const Size(200, 50)),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();

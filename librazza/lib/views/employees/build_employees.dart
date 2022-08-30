@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:librazza/functions/alert_dialog.dart';
-import 'package:librazza/models/author.dart';
+import 'package:librazza/models/employe.dart';
 import 'dart:math';
 
-import 'package:librazza/views/authors/edit_form.dart';
+import 'package:librazza/views/employees/edit_form.dart';
 
-class BuildAuthors extends StatelessWidget {
-  BuildAuthors({Key? key, this.authors, this.listAllState}) : super(key: key);
-  final List<Author>? authors;
+class BuildEmployees extends StatelessWidget {
+  BuildEmployees({Key? key, this.employees, this.listAllState})
+      : super(key: key);
+  final List<Employe>? employees;
   var listAllState;
-
-  final List<MaterialColor> colors = [Colors.blue];
-  //int randomNumber = Ramdom().
 
   @override
   Widget build(BuildContext context) {
@@ -19,46 +17,48 @@ class BuildAuthors extends StatelessWidget {
       physics:
           const NeverScrollableScrollPhysics(), //proprieda para evitar o erro do scrol
       shrinkWrap: true, //proprieda para evitar o erro do scrol
-      itemCount: authors?.length,
+      itemCount: employees?.length,
       itemBuilder: (context, index) {
         return Card(
           elevation: 10,
           margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
           child: ListTile(
-            visualDensity: VisualDensity(vertical: 1), // to expand
+            visualDensity: const VisualDensity(vertical: 1), // to expand
 
             leading: CircleAvatar(
                 backgroundColor:
                     Color((Random().nextDouble() * 0xFFFFFF).toInt())
                         .withOpacity(1.0),
-                child: Text(authors![index].name.toString()[0])
+                child: Text(employees![index].name.toString()[0])
                 //Text(
                 //(index + 1).toString()),
 
                 //style: TextStyle(fontWeight: FontWeight.w500
                 ),
-            title: Text(authors![index].name.toString()),
-            subtitle: Text("ID: ${authors![index].id}"),
+            title: Text(employees![index].name.toString()),
+            subtitle: Text("CPF: ${employees![index].cpf}"),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               //remove a sobreposição do nome "Trailing widget consumes entire tile width."
               children: [
+                //edit button
                 IconButton(
                     onPressed: () => {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    EditForm(author: authors![index])),
+                                    EditForm(employe: employees![index])),
                           ),
                         },
                     icon: const Icon(Icons.edit)),
+                //delete butom
                 IconButton(
                     onPressed: () async {
                       await DeleteItem(
-                              item: authors![index], listAllState: listAllState)
+                              item: employees![index],
+                              listAllState: listAllState)
                           .showDeleteDialog(context);
-                      //ApiServiceAuthor().deleteAuthor(authors![index].id);
                     },
                     icon: const Icon(
                       Icons.delete_forever,

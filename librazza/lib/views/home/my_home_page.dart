@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:librazza/functions/alert_dialog.dart';
-import 'package:librazza/widgets/sideBar/NavBar.dart';
+import 'package:librazza/widgets/sideBar/nav_bar.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -12,14 +12,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   Future<bool> _onWillPop(BuildContext context) async {
     bool? exitResult = await showDialog(
       context: context,
@@ -27,23 +19,6 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (context) => ExitApp().buildExitDialog(context),
     );
     return exitResult ?? false;
-  }
-
-  AlertDialog _buildExitDialog(BuildContext context) {
-    return AlertDialog(
-      //title: const Text("Confirmar"),
-      content: const Text("SAIR DO APP?"),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: Text("NÃO"),
-        ),
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          child: Text("SIM"),
-        ),
-      ],
-    );
   }
 
   @override
@@ -62,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: _incrementCounter,
+            onPressed: () {},
             tooltip: 'Increment',
             child: const Icon(Icons.add),
           ), // This trailing comma makes auto-formatting nicer for build methods.

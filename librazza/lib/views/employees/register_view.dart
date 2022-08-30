@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:librazza/views/employees/RegisterForm.dart';
+import 'package:librazza/views/employees/register_form.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({Key? key}) : super(key: key);

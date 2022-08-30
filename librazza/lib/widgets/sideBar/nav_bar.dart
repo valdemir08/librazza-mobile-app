@@ -3,15 +3,17 @@
 import 'package:flutter/material.dart';
 //import 'package:librazza/functions/ExitApp.dart';
 import 'package:librazza/functions/alert_dialog.dart';
-import 'package:librazza/views/customers/ListAll.dart' as customers;
-import 'package:librazza/views/authors/ListAll.dart' as authors;
-import 'package:librazza/views/employees/ListAll.dart' as employees;
-import 'package:librazza/views/books/ListAll.dart' as books;
-import 'package:librazza/views/loans/ListAll.dart' as loans;
+import 'package:librazza/views/customers/list_all.dart' as customers;
+import 'package:librazza/views/authors/list_all.dart' as authors;
+import 'package:librazza/views/employees/list_all.dart' as employees;
+import 'package:librazza/views/books/list_all.dart' as books;
+import 'package:librazza/views/loans/list_all.dart' as loans;
 
 //import '../../functions/exit_app.dart';
 
 class NavBar extends StatelessWidget {
+  const NavBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -61,7 +63,7 @@ class NavBar extends StatelessWidget {
             title: const Text('Autores'),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => authors.ListAll()),
+              MaterialPageRoute(builder: (context) => const authors.ListAll()),
             ),
           ),
           ListTile(

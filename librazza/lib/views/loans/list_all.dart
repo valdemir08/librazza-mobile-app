@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:librazza/views/loans/RegisterView.dart';
+import 'package:librazza/views/loans/register_view.dart';
 
 class ListAll extends StatefulWidget {
   const ListAll({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class _ListAllState extends State<ListAll> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Empréstimos"),
+        title: const Text("Empréstimos"),
       ),
       body: const Center(child: Text("Listagem de empréstimos")),
       floatingActionButton: FloatingActionButton(

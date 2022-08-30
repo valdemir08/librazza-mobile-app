@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:librazza/services/api_service_author.dart';
+import 'package:librazza/services/author.dart';
+import 'package:librazza/services/employe.dart';
 
 class ExitApp {
   Future<bool?> showExitDialog(BuildContext context) async {
@@ -36,11 +39,11 @@ class ExitApp {
 }
 
 class DeleteItem {
-  final int id;
+  final item;
 
   final listAllState;
 
-  const DeleteItem({required this.id, required this.listAllState});
+  const DeleteItem({required this.item, required this.listAllState});
 
   Future<bool?> showDeleteDialog(BuildContext context) async {
     return await showDialog(
@@ -59,10 +62,27 @@ class DeleteItem {
           child: const Text("NÃO"),
         ),
         TextButton(
-          onPressed: () => {
-            ApiServiceAuthor().deleteAuthor(id),
-            listAllState.refreshData(),
-            Navigator.of(context).pop(false)
+          onPressed: () {
+            switch (item.runtimeType.toString()) {
+              case "Author":
+                AuthorService().deleteAuthor(item.id);
+                break;
+              /*case "Book":
+                AuthorService().deleteAuthor(item.id);
+              break;
+              case "Customer":
+                AuthorService().deleteAuthor(item.id);
+              break;*/
+              case "Employe":
+                EmployeService().deleteEmploye(item.id);
+                break;
+              /*case "Loan":
+                AuthorService().deleteAuthor(item.id);
+              break;*/
+
+            }
+            listAllState.refreshData();
+            Navigator.of(context).pop(false);
           },
           child: const Text("SIM"),
         ),
