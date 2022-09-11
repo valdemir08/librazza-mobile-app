@@ -1,5 +1,12 @@
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+class CpfFor {
+  final MaskTextInputFormatter cpfFormater = MaskTextInputFormatter(
+      mask: "###.###.###-##",
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.eager);
+}
+
 final MaskTextInputFormatter cpfFormater = MaskTextInputFormatter(
     mask: "###.###.###-##",
     filter: {"#": RegExp(r'[0-9]')},

@@ -223,6 +223,8 @@ class _RegisterFormState extends State<RegisterForm> {
                         _email,
                         _birthDate,
                         1);
+
+                    print(_futureEmploye.toString());
                     Navigator.pop(context, true);
                     Navigator.pop(context, true);
                     Navigator.push(

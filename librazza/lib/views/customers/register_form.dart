@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:librazza/models/customer.dart';
+import 'package:librazza/models/employe.dart';
+import 'package:librazza/services/customer.dart';
+import 'package:librazza/views/customers/list_all.dart';
 import 'package:librazza/widgets/mask_formatter.dart' as mask;
 
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({Key? key}) : super(key: key);
+  const RegisterForm({Key? key, required this.employe}) : super(key: key);
+
+  final Employe employe;
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
@@ -12,7 +18,8 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _birthDateController = TextEditingController();
-  String? _name, _cpf, _phoneNumber, _email, _birthDate;
+  late String _name, _cpf, _phoneNumber, _email, _birthDate;
+  late final Future<Customer> _futureCustomer;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -157,6 +164,17 @@ class _RegisterFormState extends State<RegisterForm> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
+                    CustomerService().createCustomer(_name, _cpf, _phoneNumber,
+                        _email, _birthDate, widget.employe.companyId);
+                    Navigator.pop(context, true);
+                    Navigator.pop(context, true);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ListAll(employe: widget.employe)),
+                    );
+
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Sucesso!")));
                   }

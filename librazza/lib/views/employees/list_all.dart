@@ -60,7 +60,6 @@ class _ListAllState extends State<ListAll> {
                         ],
                       );
                     } else if (snapshot.data.toString() == "[]") {
-                      print(snapshot.data.toString());
                       return const Text(//snapshot.hasData
                           'Ainda não há Funcionários cadastrados');
                     } else {

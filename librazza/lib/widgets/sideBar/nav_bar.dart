@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 //import 'package:librazza/functions/ExitApp.dart';
 import 'package:librazza/functions/alert_dialog.dart';
+import 'package:librazza/models/employe.dart';
 import 'package:librazza/views/customers/list_all.dart' as customers;
 import 'package:librazza/views/authors/list_all.dart' as authors;
 import 'package:librazza/views/employees/list_all.dart' as employees;
@@ -12,7 +13,9 @@ import 'package:librazza/views/loans/list_all.dart' as loans;
 //import '../../functions/exit_app.dart';
 
 class NavBar extends StatelessWidget {
-  const NavBar({Key? key}) : super(key: key);
+  const NavBar({Key? key, required this.employe}) : super(key: key);
+
+  final Employe employe;
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +23,15 @@ class NavBar extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const UserAccountsDrawerHeader(
-            accountName: Text('Fulano'),
-            accountEmail: Text('fulano@librazza.com'),
-            currentAccountPicture: CircleAvatar(
+          UserAccountsDrawerHeader(
+            accountName: Text(employe.name),
+            accountEmail: Text(employe.email),
+            currentAccountPicture: const CircleAvatar(
               child: ClipOval(
                 child: Icon(Icons.person, size: 60),
               ),
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.brown,
               //image:
             ),
@@ -47,7 +50,9 @@ class NavBar extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const customers.ListAll()),
+                  builder: (context) => customers.ListAll(
+                        employe: employe,
+                      )),
             ),
           ),
           ListTile(

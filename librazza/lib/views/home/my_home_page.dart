@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:librazza/functions/alert_dialog.dart';
+import 'package:librazza/models/employe.dart';
 import 'package:librazza/widgets/sideBar/nav_bar.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title, required this.employe})
+      : super(key: key);
 
+  final Employe employe;
   final String title;
 
   @override
@@ -26,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return WillPopScope(
         onWillPop: () => _onWillPop(context),
         child: Scaffold(
-          drawer: NavBar(),
+          drawer: NavBar(employe: widget.employe),
           appBar: AppBar(
             title: Text(widget.title),
           ),
