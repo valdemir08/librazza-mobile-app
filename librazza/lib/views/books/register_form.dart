@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:librazza/services/book.dart';
+import 'package:librazza/views/books/list_all.dart';
 import 'package:librazza/widgets/mask_formatter.dart' as mask;
 
+import '../../models/author.dart';
+import '../../models/employe.dart';
+import '../../services/author.dart';
+
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({Key? key}) : super(key: key);
+  const RegisterForm({Key? key, required this.employe}) : super(key: key);
+  final Employe employe;
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
@@ -12,23 +19,36 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
-  String? _title,
+  late String _title,
       _edition,
       _publishing_company,
       _year_of_publication,
       _number_of_pages,
       _code_bar,
       _gender,
-      _amount,
       _isbn;
+
+  late int _amount, _authorId;
+  late TextEditingController _authorController = TextEditingController();
+
+  late List<Author> _authors = <Author>[];
+
+  static String _displayStringForOption(Author option) => option.name!;
+
+  //Future<List<Author>> authors;
+  void getData() async {
+    _authors = await AuthorService().getAuthors();
+  }
 
   @override
   void initState() {
     super.initState();
+    getData();
   }
 
   @override
   void dispose() {
+    //_authorController.dispose();
     super.dispose();
   }
 
@@ -90,6 +110,78 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
               ),
             ),
+
+            Container(
+                margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: Autocomplete<Author>(
+                    displayStringForOption: _displayStringForOption,
+                    optionsBuilder: (TextEditingValue textEditingValue) {
+                      if (textEditingValue.text.isEmpty) {
+                        return const Iterable<Author>.empty();
+                      }
+                      return _authors.where((Author option) {
+                        return option
+                            .toString()
+                            .toLowerCase()
+                            .contains(textEditingValue.text.toLowerCase());
+                      });
+                    },
+                    optionsViewBuilder:
+                        (context, Function(Author) onSelected, _authors) {
+                      return Material(
+                        elevation: 4,
+                        child: ListView.separated(
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (context, index) {
+                            final author = _authors.elementAt(index);
+
+                            return ListTile(
+                              title: Text(author.name!),
+                              onTap: () {
+                                onSelected(author);
+                              },
+                            );
+                          },
+                          separatorBuilder: (context, index) => Divider(),
+                          itemCount: _authors.length,
+                        ),
+                      );
+                    },
+                    fieldViewBuilder:
+                        (context, controller, focusNode, onEditingComplete) {
+                      _authorController = controller;
+
+                      return TextField(
+                        controller: controller,
+                        focusNode: focusNode,
+                        onEditingComplete: onEditingComplete,
+                        /*decoration: const InputDecoration(
+                          
+                          border: OutlineInputBorder(),
+                          labelText: "Título",
+                        ),*/
+                        decoration: InputDecoration(
+                          icon: Icon(Icons.person),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          hintText: "Procure um autor",
+                          prefixIcon: Icon(Icons.search),
+                        ),
+                      );
+                    },
+                    onSelected: (Author selection) {
+                      _authorId = selection.id;
+                    })),
             //editora
             Container(
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -212,7 +304,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   labelText: "Quantidade de livros",
                 ),
                 onSaved: (String? value) {
-                  _amount = value.toString();
+                  _amount = int.parse(value!);
                 },
                 keyboardType: TextInputType.text,
                 validator: (value) {
@@ -264,8 +356,31 @@ class _RegisterFormState extends State<RegisterForm> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
+
+                    BookService().createBook(
+                        _title, //
+                        _edition,
+                        _publishing_company,
+                        _year_of_publication,
+                        _number_of_pages,
+                        _code_bar,
+                        _gender,
+                        _amount,
+                        widget.employe.companyId,
+                        _isbn,
+                        _authorId);
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Sucesso!")));
+
+                    Navigator.pop(context, true);
+                    Navigator.pop(context, true);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ListAll(
+                                employe: widget.employe,
+                              )),
+                    );
                   }
                 },
                 child: const Text("Enviar"),

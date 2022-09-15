@@ -60,7 +60,10 @@ class NavBar extends StatelessWidget {
             title: const Text('Livros'),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const books.ListAll()),
+              MaterialPageRoute(
+                  builder: (context) => books.ListAll(
+                        employe: employe,
+                      )),
             ),
           ),
           ListTile(

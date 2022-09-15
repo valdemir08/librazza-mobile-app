@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:librazza/models/employe.dart';
 import 'package:librazza/views/books/register_form.dart';
 
 class RegisterView extends StatelessWidget {
-  const RegisterView({Key? key}) : super(key: key);
+  const RegisterView({Key? key, required this.employe}) : super(key: key);
+  final Employe employe;
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +12,11 @@ class RegisterView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Adicionar livro"),
       ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
-        child: RegisterForm(),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
+        child: RegisterForm(
+          employe: employe,
+        ),
       ),
     );
   }

@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:librazza/services/author.dart';
+import 'package:librazza/services/book.dart';
+import 'package:librazza/services/customer.dart';
 import 'package:librazza/services/employe.dart';
 
 class ExitApp {
@@ -67,12 +69,12 @@ class DeleteItem {
               case "Author":
                 AuthorService().deleteAuthor(item.id);
                 break;
-              /*case "Book":
-                AuthorService().deleteAuthor(item.id);
-              break;
+              case "Book":
+                BookService().deleteBook(item.id);
+                break;
               case "Customer":
-                AuthorService().deleteAuthor(item.id);
-              break;*/
+                CustomerService().deleteCustomer(item.id);
+                break;
               case "Employe":
                 EmployeService().deleteEmploye(item.id);
                 break;

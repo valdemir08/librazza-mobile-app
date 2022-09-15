@@ -37,6 +37,7 @@ dependencies:
   intl: ^0.17.0
   mask_text_input_formatter: ^2.4.0
   http: ^0.13.5
+  textfield_search: ^0.10.0
 
 
 dev_dependencies:

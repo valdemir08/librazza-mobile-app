@@ -17,6 +17,6 @@ class Author {
 
   @override
   String toString() {
-    return '{id: $this.id, name: $this.name}';
+    return '$id, $name';
   }
 }
