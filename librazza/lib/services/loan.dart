@@ -30,25 +30,19 @@ class LoanService {
     }
   }
 
-  Future<bool> createLoan(
-      String initDate,
-      String returnPeriod,
-      String returnDate,
-      String status,
-      int customerId,
-      int employeId,
-      int bookId) async {
+  Future<bool> createLoan(String initDate, String closeDate, String status,
+      int customerId, int employeId, int bookId) async {
     http.Response response = await http.post(
       Uri.parse("$url/add/"),
 
       body: {
         'data_inicio': initDate,
-        'prazo_devolucao': returnPeriod,
-        'data_devolucao': returnDate,
+        //'prazo_devolucao': returnPeriod,
+        'data_devolucao': closeDate,
         'status': status,
-        'cliente_id': customerId,
-        'funcionario_id': employeId,
-        'livro_id': bookId,
+        'cliente_id': customerId.toString(),
+        'funcionario_id': employeId.toString(),
+        'livro_id': bookId.toString(),
       }, //jsonEncode não estava funcionando
     );
     if (response.statusCode == 201) {
@@ -58,15 +52,8 @@ class LoanService {
     }
   }
 
-  Future<bool> updateLoan(
-      int id,
-      String openDate,
-      String returnPeriod,
-      String closeDate,
-      String status,
-      int customerId,
-      int employeId,
-      int bookId) async {
+  Future<bool> updateLoan(int id, String openDate, String closeDate,
+      String status, int customerId, int employeId, int bookId) async {
     http.Response response = await http.put(
       Uri.parse("$url/$id/"),
       /* headers: <String, String>{
@@ -74,7 +61,6 @@ class LoanService {
       }, */
       body: {
         'data_inicio': openDate,
-        'prazo_devolucao': returnPeriod,
         'data_devolucao': closeDate,
         'status': status,
         'cliente_id': customerId,

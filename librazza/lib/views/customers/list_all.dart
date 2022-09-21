@@ -6,7 +6,9 @@ import 'package:librazza/views/customers/build_customers.dart';
 import 'package:librazza/views/customers/register_view.dart';
 
 class ListAll extends StatefulWidget {
-  const ListAll({Key? key, required this.employe}) : super(key: key);
+  late _ListAllState listAll;
+
+  ListAll({Key? key, required this.employe}) : super(key: key);
   final Employe employe;
 
   @override
@@ -17,6 +19,7 @@ class _ListAllState extends State<ListAll> {
   @override
   void initState() {
     super.initState();
+    widget.listAll = this;
     refreshData();
   }
 
@@ -71,9 +74,11 @@ class _ListAllState extends State<ListAll> {
                       );
                     } else {
                       return BuildCustomers(
-                          customers: snapshot.data,
-                          listAllState: this,
-                          employe: widget.employe);
+                        customers: snapshot.data,
+                        listAllState: this,
+                        employe: widget.employe,
+                        listAll: widget.listAll,
+                      );
                     }
                   } else {
                     return Text('State: ${snapshot.connectionState}');

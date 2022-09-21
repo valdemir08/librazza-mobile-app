@@ -34,7 +34,7 @@ class BuildLoans extends StatelessWidget {
                 child: Text(loans![index].openDate.toString()[0])),
             title: Text(loans![index].openDate.toString()),
             subtitle: Text(
-                "Ed: ${loans![index].returnPeriod} Gên: ${loans![index].bookId}}"),
+                "Cliente: ${loans![index].customerId} Encerra em: ${loans![index].closeDate}}"),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               //remove a sobreposição do nome "Trailing widget consumes entire tile width."

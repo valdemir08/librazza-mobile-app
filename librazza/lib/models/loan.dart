@@ -1,7 +1,7 @@
 class Loan {
   final int id;
   final String openDate;
-  final String returnPeriod;
+  //final int returnPeriod;
   final String closeDate;
   final String status;
   final int customerId;
@@ -11,7 +11,7 @@ class Loan {
   Loan({
     required this.id,
     required this.openDate,
-    required this.returnPeriod,
+    //required this.returnPeriod,
     required this.closeDate,
     required this.status,
     required this.customerId,
@@ -21,7 +21,7 @@ class Loan {
 
   Map<String, dynamic> toJson() => {
         'data_inicio': openDate,
-        'prazo_devolucao': returnPeriod,
+        //'prazo_devolucao': returnPeriod,
         'data_devolucao': closeDate,
         'status': status,
         'cliente_id': customerId,
@@ -33,7 +33,7 @@ class Loan {
     return Loan(
       id: json['id'],
       openDate: json['data_inicio'],
-      returnPeriod: json['prazo_devolucao'],
+      //returnPeriod: json['prazo_devolucao'],
       closeDate: json['data_devolucao'],
       status: json['status'],
       customerId: json['cliente_id'],

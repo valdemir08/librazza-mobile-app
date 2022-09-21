@@ -41,7 +41,10 @@ class NavBar extends StatelessWidget {
             title: const Text('Empréstimos'),
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const loans.ListAll()),
+              MaterialPageRoute(
+                  builder: (context) => loans.ListAll(
+                        employe: employe,
+                      )),
             ),
           ),
           ListTile(

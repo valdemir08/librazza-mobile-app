@@ -33,9 +33,6 @@ class _EditFormState extends State<EditForm> {
   late final TextEditingController _closeDateController =
       TextEditingController(text: loan.closeDate);
 
-  late final TextEditingController _returnPeriodController =
-      TextEditingController(text: loan.returnPeriod);
-
   late final TextEditingController _statusController =
       TextEditingController(text: loan.status);
 
@@ -189,8 +186,6 @@ class _EditFormState extends State<EditForm> {
                           LoanService().updateLoan(
                             loan.id,
                             _openDateController.text, //
-
-                            _returnPeriodController.text,
                             _closeDateController.text,
                             _statusController.text,
                             int.parse(_customerIdController.text),

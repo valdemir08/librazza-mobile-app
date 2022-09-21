@@ -8,11 +8,16 @@ import 'package:librazza/views/customers/edit_form.dart';
 
 class BuildCustomers extends StatelessWidget {
   BuildCustomers(
-      {Key? key, this.customers, this.listAllState, required this.employe})
+      {Key? key,
+      this.customers,
+      this.listAllState,
+      required this.employe,
+      required this.listAll})
       : super(key: key);
   final List<Customer>? customers;
   final Employe employe;
   var listAllState;
+  final listAll;
 
   final List<MaterialColor> colors = [Colors.blue];
   //int randomNumber = Ramdom().
@@ -53,8 +58,10 @@ class BuildCustomers extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => EditForm(
-                                    customer: customers![index],
-                                    employe: employe)),
+                                      customer: customers![index],
+                                      employe: employe,
+                                      listAll: listAll,
+                                    )),
                           ),
                         },
                     icon: const Icon(Icons.edit)),

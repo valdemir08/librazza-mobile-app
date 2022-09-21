@@ -8,8 +8,13 @@ import 'package:librazza/views/customers/list_all.dart';
 class EditForm extends StatefulWidget {
   final Customer customer;
   final Employe employe;
+  final listAll;
 
-  EditForm({Key? key, required this.customer, required this.employe})
+  EditForm(
+      {Key? key,
+      required this.customer,
+      required this.employe,
+      required this.listAll})
       : super(key: key);
   @override
   State<EditForm> createState() => _EditFormState();
@@ -184,7 +189,7 @@ class _EditFormState extends State<EditForm> {
                         child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           minimumSize: const Size(200, 50)),
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
 
@@ -195,6 +200,8 @@ class _EditFormState extends State<EditForm> {
                               _phoneNumberController.text,
                               _emailController.text,
                               _birthDateController.text);
+
+                          await widget.listAll.refreshData();
 
                           Navigator.pop(context, true);
                           Navigator.pop(context, true);
